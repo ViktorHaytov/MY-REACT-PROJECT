@@ -1,0 +1,54 @@
+const requester = async (method, url, data) => {
+    const options = {};
+
+    if (method !== 'GET') {
+        options.method = method;
+
+        if (data) {
+            options.headers = {
+                'content-type': 'application/json',
+            };
+
+            options.body = JSON.stringify(data);
+        };
+    };
+
+    const serializedAuthToken = localStorage.getItem('authToken');
+    if (serializedAuthToken) {
+        const auth = JSON.parse(serializedAuthToken);
+
+        if (auth.accessToken) {
+            options.headers = {
+                ...options.headers,
+                'X-Authorization': auth.accessToken,
+            };
+
+        };
+    };
+
+    const response = await fetch(url, options);
+
+    if (response.status === 204) {
+        return {};
+    };
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw result;
+    };
+
+    return result;
+
+};
+
+export const requesterFactory = () => {
+
+    return {
+        get: requester.bind(null, 'GET'),
+        post: requester.bind(null, 'POST'),
+        put: requester.bind(null, 'PUT'),
+        delete: requester.bind(null, 'DELETE'),
+    };
+
+};

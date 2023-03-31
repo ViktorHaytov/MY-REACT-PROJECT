@@ -1,0 +1,26 @@
+body {
+  background-image: url('../images/un-libro-abierto-colocado-en-tres-libros-sobre-un-fondo-de-madera-rustica-celebracion-del-dia-del-libro-700-200145253.jpg');
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos del contenido principal */
+main {
+  margin: 20px;
+}
+
+main h2 {
+  font-size: 24px;
+  margin-top: 40px;
+}
+
+main p {
+  margin-bottom: 20px;
+}
+
+main ul {
+  margin-left: 20px;
+}
